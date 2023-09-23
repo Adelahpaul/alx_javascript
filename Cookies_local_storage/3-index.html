@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="loginform">
+    <h2>Login</h2>
+
+<input type="text" id="firstname" placeholder="First name">
+<input type="email" id="email" placeholder="Email">
+
+<button onclick="setCookies()">Log me in</button>
+
+<p id="cookies"></p>
+  </div>
+
+<script type="application/javascript">
+function showForm() {
+  // Remove the Welcome message if it exists.
+  const welcomeMessage = document.querySelector("h1");
+  if (welcomeMessage) {
+    welcomeMessage.remove();
+  }
+
+  // Show the form.
+  const form = document.querySelector("form");
+  form.style.display = "block";
+}
+
+function hideForm() {
+  // Hide the form.
+  const form = document.querySelector("form");
+  form.style.display = "none";
+}
+
+function deleteCookiesAndShowForm() {
+  // Delete the two cookies.
+  document.cookie = "firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+
+  // Show the form.
+  showForm();
+}
+
+function showWelcomeMessageOrForm() {
+  // Get the firstname cookie.
+  const firstnameCookie = getCookie("firstname");
+
+  // If the user is not logged in, show the form.
+  if (!firstnameCookie) {
+    showForm();
+  } else {
+    // Replace the body of the page with a h1 that displays `Welcome FIRSTNAME (logout)`.
+    const body = document.querySelector("body");
+    body.innerHTML = "(logout)";
+
+    const welcomeMessage = document.createElement("h1");
+    welcomeMessage.textContent = `Welcome ${firstnameCookie} (logout)`;
+
+    // Create a link for the logout button.
+    const logoutLink = document.createElement("a");
+    logoutLink.textContent = "logout";
+    logoutLink.href = "";
+    logoutLink.addEventListener("click", deleteCookiesAndShowForm);
+
+    // Style the logout link.
+    logoutLink.style.fontWeight = "normal";
+    logoutLink.style.fontStyle = "italic";
+    logoutLink.style.marginRight = "10px";
+
+    // Append the welcome message and logout link to the body of the page.
+    body.appendChild(welcomeMessage);
+    body.appendChild(logoutLink);
+  }
+}
+
+    function setCookies() {
+  // Get the values from the text inputs.
+  const firstName = document.getElementById("firstname").value;
+  const email = document.getElementById("email").value;
+
+  // Set the cookies.
+  document.cookie = `firstname=${firstName}; expires=${new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toUTCString()}`;
+  document.cookie = `email=${email}; expires=${new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toUTCString()}`;
+}
+
+function showCookies() {
+  // Get the cookies.
+  const cookies = document.cookie.split("; ");
+
+  // Get the email and firstname cookies.
+  const emailCookie = getCookie("email");
+  const firstnameCookie = getCookie("firstname");
+
+  // Create a paragraph element to display the cookies.
+  const cookiesParagraph = document.createElement("p");
+  cookiesParagraph.textContent = `Email: ${emailCookie} - Firstname: ${firstnameCookie}`;
+
+  // Append the paragraph element to the bottom of the page.
+  document.body.appendChild(cookiesParagraph);
+}
+
+
+  function getCookie(name) {
+  // Get the cookies.
+  const cookies = document.cookie.split("; ");
+
+  // Iterate over the cookies and find the cookie with the given name.
+  for (const cookie of cookies) {
+    const [key, value] = cookie.split("=");
+    if (key === name) {
+      return value;
+    }
+  }
+
+  // If the cookie does not exist, return an empty string.
+  return "";
+}
+
+ </script>
+</body>
+</html>
