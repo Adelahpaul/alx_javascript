@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>alx javasript cookies </title>
+    </head>
+    <body>
+        <p id="cookies"></p>
+        <form action="">
+            <h3>Login Form</h3>
+            <input type="text" id="firstname" name="fn" placeholder="Firstname">
+            <input type="text" id="email" name="mail" placeholder="Email">
+            <button onclick="setCookies()" type="button" id="btn">Log me in</button>
+            <h3>Cookies</h3>
+            <button onclick="showCookies()"type="button" id="btn">Show the cookies</button>
+
+            <script>
+                function setCookies(){
+                    // Get the values from the text inputs.
+  const firstName = document.getElementById("firstname").value;
+  const email = document.getElementById("email").value;
+
+  // Set the cookies.
+  document.cookie = `firstname=${firstName}`;
+  document.cookie = `email=${email}`;
+}
+ 
+// second function
+function showCookies(){
+     // Get the cookies.
+  const cookies = document.cookie.split("; ");
+
+// Create a paragraph element to display the cookies.
+const cookiesParagraph = document.createElement("p");
+cookiesParagraph.textContent = "Cookies:";
+
+// Iterate over the cookies and append them to the paragraph element.
+for (const cookie of cookies) {
+  const [name, value] = cookie.split("=");
+  cookiesParagraph.textContent += `\n${name}: ${value}`;
+}
+
+// Append the paragraph element to the bottom of the page.
+document.body.appendChild(cookiesParagraph);
+
+}
+            </script>
+        </form>
+    </body>
+</html>
