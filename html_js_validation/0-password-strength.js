@@ -38,20 +38,19 @@ const showError = (input, message) => {
     formField.classList.remove('success');
     formField.classList.add('error');
 
-    // show the error message
-    const error = formField.querySelector('p');
+    // show the error message]  const error = formField.querySelector('p');
     error.textContent = message;
 };
 
 const showSuccess = (input) => {
-    // get the form-field element
+    // get the form-field elem]ent
     const formField = input.parentElement;
 
     // remove the error class
     formField.classList.remove('error');
     formField.classList.add('success');
 
-    // hide the error message
+    // hide the error messag
     const error = formField.querySelector('p');
     error.textContent = '';
 }
