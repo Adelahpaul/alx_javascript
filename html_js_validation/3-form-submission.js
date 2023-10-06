@@ -9,7 +9,7 @@ function handleFormSubmit(){
     const name = nameEl.value.trim();
     const email = emailEl.value.trim();
 
-    if (!isRequired(name) || (email)) {
+    if (name == '' || email =='') {
         alert( 'Please fill in all required fields.');
         valid = false;
     } else {
@@ -20,7 +20,7 @@ function handleFormSubmit(){
     return valid;   
 }
 
-const isRequired = value => value === '' ? false : true;
+
 
 
 form.addEventListener('submit', function (e) {
