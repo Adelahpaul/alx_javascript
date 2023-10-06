@@ -11,7 +11,7 @@ function validateEmail(){
         emaileror.innerHTML= "Please enter a valid email address";
         return false;
     }
-    return true;
+    return true;   
     form.addEventListener('submit', function (e) {
         // prevent the form from submitting
         e.preventDefault();
